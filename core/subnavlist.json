@@ -1,0 +1,45 @@
+{
+    "tools": [
+        "basic_calculator",
+        "scientific_calculator",
+        "form_validator",
+        "time_tools",
+        "unit_converter",
+        "suggestion_bot",
+        "todolist",
+        "json_formatter_and_validator",
+        "markdown_preview",
+        "typing_speed_test",
+        "flashcard",
+        "habit_tracker",
+        "crud_table",
+        "cipher_decipher"
+    ],
+    "games": [
+        "math_game",
+        "common_sense_game",
+        "money_game",
+        "rpg_game",
+        "chatbot",
+        "diary",
+        "finance_note",
+        "contact_note",
+        "falling_object_game",
+        "snake_game",
+        "blackjack",
+        "memory_card_game",
+        "rock_paper_scissor",
+        "trading_simulation",
+        "counter_and_range_quiz"
+    ],
+    "playgrounds": [
+        "cmd_terminal_and_crud",
+        "powershell_terminal_and_crud",
+        "file_organizer",
+        "html_css_live_editor",
+        "js_console_log",
+        "fetchapi_viewer",
+        "sql_playground",
+        "drag_and_drop"
+    ]
+}

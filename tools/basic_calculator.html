@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UtilityGamePg</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../core/base.css">
+    <link rel="icon" type="image/png" href="../core/assets/extension_icon.png"> 
+    <style type="text/tailwindcss">
+         .settinglist{
+            @apply
+            p-1 border-b border-slate-700 
+            hover:bg-[rgba(0,0,0,0.5)] cursor-pointer
+        }
+        .calcbtn{
+            @apply
+            flex justify-center bg-slate-950 p-2 text-2xl text-[rgba(255,255,255,0.5)] rounded-full
+             border-2 border-red-800 hover:bg-[rgba(0,0,0,0.5)] active:bg-[rgba(0,0,0,0.9)]
+        }
+        .calcdisplay{
+            @apply
+            bg-slate-950 p-1 text-lg min-h-[6vh] text-[rgba(255,255,255,0.5)]
+             rounded-xl border-2 border-red-800
+        }
+    </style>
+</head>
+<body class="m-0 p-0 text-neutral-300 h-screen overflow-hidden">
+    <div id="app" class="flex flex-col h-full ">
+        <header class="flex flex-row justify-between items-center min-w-full h-12
+             bg-slate-900 border-gray-800 border-b-4" id="header">
+            <div id="settingbtn" class="ml-2 hover:text-gray-400 cursor-pointer tooltip tooltip-bottom
+             text-2xl font-bold [text-shadow:2px_0px_0px_azure]"  data-tip="Settings">
+                <i class="fa fa-gear"></i>
+            </div>
+            <div id="titlebtn" class="md:[letter-spacing:0.25rem] min-w-28 hover:text-gray-400 cursor-pointer tooltip tooltip-bottom 
+             [letter-spacing:0.2rem] text-2xl font-bold [text-shadow:2px_0px_0px_azure]" data-tip="Lobby">
+                <a href="../index.html">UTG STUDIO</a>
+            </div>
+            <div class="md:[letter-spacing:0.25rem] md:gap-6 sm:gap-4 flex flex-row items-center
+                    [letter-spacing:0.2rem] text-2xl font-bold [text-shadow:2px_0px_0px_azure] mr-2">
+                <h2 class="sm:inline hidden tooltip tooltip-bottom hover:text-gray-400 cursor-pointer"  data-tip="About"><a href="../about.html">About</a></h2>
+                <h2 class="sm:inline hidden tooltip tooltip-bottom hover:text-gray-400 cursor-pointer"  data-tip="Landing Page"><a href="../index.html">LP</a></h2>
+                <h2 class="sm:inline hidden tooltip tooltip-bottom hover:text-gray-400 cursor-pointer"  data-tip="Content Post"><a href="../content_post.html">CP</a></h2>
+                <h2 class="sm:inline hidden tooltip tooltip-bottom hover:text-gray-400 cursor-pointer"  data-tip="More"><a href="../index.html">More</a></h2>
+                <div class="flex items-center tooltip tooltip-bottom hover:text-gray-400 cursor-pointer" data-tip="Search">
+                    <i class="fa fa-search" id="searchbtn"></i>
+                </div>
+            </div>
+        </header>
+
+        <nav class="flex flex-row min-w-full h-8 bg-slate-900 
+            border-slate-800 border-b whitespace-nowrap" id="nav">
+            <div id="barbtn" class="flex items-center px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <i class="text-2xl fa fa-bars"></i>
+            </div>
+            <div class="flex justify-center items-center flex-grow px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="../index.html">Landing Page</a></div> 
+            </div>
+            <div class="flex  justify-center items-center flex-grow px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="../content_post.html">Content Post</a></div> 
+            </div>
+            <div class="flex  justify-center items-center flex-grow px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="../tools/main.html">Tools</a></div>
+            </div>
+            <div class="flex  justify-center items-center flex-grow px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="../games/main.html">Games</a></div>
+            </div>
+            <div class="flex  justify-center items-center flex-grow px-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="../playgrounds/main.html">Playground</a></div>
+            </div>
+        </nav>
+
+        <div class="flex relative">
+            <div class="absolute top-0 left-0 w-full bg-[rgba(15,15,15,0.8)] z-50 text-[rgba(255,255,255,0.8)] hidden" id="searchbar">
+                <div class="flex flex-col gap-4 justify-center whitespace-nowrap">
+                    <input id="searchinput" placeholder="search" class="mt-4 p-1 rounded-full border-2 border-black ring-1 bg-[rgba(0,0,0,0.1)]">
+                        <hr>
+                        <div class="flex flex-col gap-2 h-[40vh]" id="searchResult">
+                        </div>
+                </div>
+            </div>
+
+            <div class="absolute top-0 left-0 w-full bg-[rgba(15,15,15,0.8)] z-50 text-[rgba(255,255,255,0.8)] hidden" id="settingbar">
+                <div class="flex flex-col gap-4 justify-center whitespace-nowrap">
+                        <div class="flex flex-col gap-2 h-[60vh]">
+                            <div class="text-xl font-bold">Theme <i class="fa fa-caret-down"></i></div>
+                            <div class="ml-2 flex flex-col gap-2">
+                                <li class="btn btn-neutral" id="darkbtn">Dark Mode</li>
+                                <li class="btn" id="lightbtn">Light Mode</li>
+                            </div>
+                            <div class="text-xl font-bold">Language <i class="fa fa-caret-down"></i></div>
+                            <div class="ml-2 flex flex-col gap-2">
+                                <li class="btn btn-primary" id="langAbtn">Indonesia</li>
+                                <li class="btn btn-secondary" id="langBbtn">English</li>
+                                <li class="btn btn-accent" id="langCbtn">Japanese</li>
+                            </div>
+                            <div class="text-xl font-bold">Font <i class="fa fa-caret-down"></i></div>
+                            <div class="ml-2 flex flex-col gap-2">
+                                <li class="btn btn-success" id="fontAbtn">Times New Roman</li>
+                                <li class="btn btn-warning" id="fontBbtn">Verdana</li>
+                                <li class="btn btn-error" id="fontCbtn">Courier</li>
+                                <li class="btn btn-secondary" id="fontDbtn">Default</li>
+                                <li class="btn btn-accent" id="fontEbtn">Serif</li>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="md:w-[30%] sm:w-[40%] absolute top-0 left-0 w-[50%] bg-[rgba(15,15,15,0.8)] 
+                z-50 text-[rgba(255,255,255,0.8)] overflow-x-hidden hidden" id="subnavbar">
+                <div class="flex flex-col gap-2">
+                    <div class="text-xl font-bold">Tools <i class="fa fa-caret-down"></i></div>
+                        <div class="sm:ml-2 flex flex-col gap-2" id="toollists">
+                            
+                        </div>
+                    <div class="text-xl font-bold">Games <i class="fa fa-caret-down"></i></div>
+                        <div class="sm:ml-2 flex flex-col gap-2" id="gamelists">
+                            
+                        </div>
+                    <div class="text-xl font-bold">Playground <i class="fa fa-caret-down"></i></div>
+                        <div class="sm:ml-2 flex flex-col gap-2" id="playgroundlists">
+                            
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <main class="flex-1 flex items-center flex-col min-w-full bg-slate-950"
+            id="container">
+            <div class="sm:w-[75%] flex flex-col gap-4 w-[90%] bg-slate-950
+                " id="container-content">
+                <section class="flex justify-center w-full min-h-[70vh] bg-[rgba(0,0,0,0.1)] mt-8">
+                     <div class="flex flex-col gap-2 bg-neutral-300 p-4 m-2 rounded-2xl border-4 border-red-900 min-h-[65vh] max-h-[90vh] min-w-[50vh] max-w-[60vh]">
+                        <div class="calcdisplay" id="display"></div>
+                        <div class="calcdisplay" id="result"></div>
+                        <div class="grid grid-cols-4 gap-4 mt-4">
+                            <button class="calcbtn" id="clearbtn">C</button>
+                            <button class="calcbtn" id="zerobtn">0</button>
+                            <button class="calcbtn" id="removebtn">CE</button>
+                            <button class="calcbtn" id="addbtn">+</button>
+                            <button class="calcbtn" id="onebtn">1</button>
+                            <button class="calcbtn" id="twobtn">2</button>
+                            <button class="calcbtn" id="threebtn">3</button>
+                            <button class="calcbtn" id="subtractbtn">-</button>
+                            <button class="calcbtn" id="fourbtn">4</button>
+                            <button class="calcbtn" id="fivebtn">5</button>
+                            <button class="calcbtn" id="sixbtn">6</button>
+                            <button class="calcbtn" id="multiplybtn">*</button>
+                            <button class="calcbtn" id="sevenbtn">7</button>
+                            <button class="calcbtn" id="eightbtn">8</button>
+                            <button class="calcbtn" id="ninebtn">9</button>
+                            <button class="calcbtn" id="dividebtn">/</button>
+                        </div>
+                     </div>
+                </section>
+               
+            </div>
+
+        </main>
+
+        <footer class="flex justify-center items-center gap-4 flex-none bg-slate-900 w-full h-10 p-1 text-xs"
+            id="footer">
+            <p class="mt-1">Local Time: <span id="time"></span> WIB</p> 
+            <cite>@Copyright According to International Law</cite>
+        </footer>
+    </div>
+
+    <script type="module" src="../core/core.js"></script>
+    <script type="module" src="./search.js"></script>
+    <script type="module" src="./subnav.js"></script>
+    <script type="module" src="../core/theme.js"></script>
+    <script type="module" src="../core/font.js"></script>
+     <script type="module" src="./basic_calculator.js"></script>
+</body>
+</html> 

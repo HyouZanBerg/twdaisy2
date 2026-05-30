@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UtilityGamePg</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./core/base.css">
+    <link rel="icon" type="image/png" href="./core/assets/extension_icon.png"> 
+    <style type="text/tailwindcss">
+         .settinglist{
+            @apply
+            p-1 border-b border-slate-700 
+            hover:bg-[rgba(0,0,0,0.5)] cursor-pointer
+        }
+    </style>
+</head>
+<body class="m-0 p-0 text-neutral-300 h-screen overflow-hidden">
+    <div id="app" class="flex flex-col h-full ">
+        <header class="flex flex-row justify-between items-center min-w-full h-12
+             bg-slate-900 border-gray-800 border-b-4" id="header">
+            <div id="settingbtn" class="ml-2 hover:text-gray-400 cursor-pointer tooltip tooltip-bottom
+             text-2xl font-bold [text-shadow:2px_0px_0px_azure]"  data-tip="Settings">
+                <i class="fa fa-gear"></i>
+            </div>
+            <div id="titlebtn" class="md:[letter-spacing:0.25rem] min-w-28 hover:text-gray-400 cursor-pointer tooltip tooltip-bottom 
+             [letter-spacing:0.2rem] text-2xl font-bold [text-shadow:2px_0px_0px_azure]" data-tip="Lobby">
+                <a href="./index.html">UTG STUDIO</a>
+            </div>
+            <div class="md:[letter-spacing:0.25rem] md:gap-6 sm:gap-4 flex flex-row items-center
+                    [letter-spacing:0.2rem] text-2xl font-bold [text-shadow:2px_0px_0px_azure] mr-2">
+                <h2 class="sm:inline hidden tooltip tooltip-bottom hover:text-gray-400 cursor-pointer"  data-tip="About"><a href="./about.html">About</a></h2>
+                <h2 class="sm:inline hidden tooltip tooltip-bottom hover:text-gray-400 cursor-pointer" data-tip="Landing Page"><a href="./index.html">LP</a></h2>
+                <h2 class="sm:inline hidden tooltip tooltip-bottom hover:text-gray-400 cursor-pointer" data-tip="Content Post"><a href="./content_post.html">CP</a></h2>
+                <h2 class="md:inline hidden tooltip tooltip-bottom hover:text-gray-400 cursor-pointer" data-tip="More"><a href="./index.html">More</a></h2>
+                <div class="flex items-center tooltip tooltip-bottom hover:text-gray-400 cursor-pointer" data-tip="Search">
+                    <i class="fa fa-search" id="searchbtn"></i>
+                </div>
+            </div>
+        </header>
+
+        <nav class="flex flex-row min-w-full h-8 bg-slate-900 
+            border-slate-800 border-b whitespace-nowrap" id="nav">
+            <div id="barbtn" class="flex items-center px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <i class="text-2xl fa fa-bars"></i>
+            </div>
+            <div class="flex justify-center items-center flex-grow px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="./index.html">Landing Page</a></div> 
+            </div>
+            <div class="flex  justify-center items-center flex-grow px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="./content_post.html">Content Post</a></div> 
+            </div>
+            <div class="flex  justify-center items-center flex-grow px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="./tools/main.html">Tools</a></div>
+            </div>
+            <div class="flex  justify-center items-center flex-grow px-2 border-r-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="./games/main.html">Games</a></div>
+            </div>
+            <div class="flex  justify-center items-center flex-grow px-2 border-slate-700
+                hover:bg-[rgba(0,0,0,0.2)] cursor-pointer">
+                <div class="border-black border-b-2"><a href="./playgrounds/main.html">Playground</a></div>
+            </div>
+        </nav>
+
+        <div class="flex relative">
+            <div class="absolute top-0 left-0 w-full bg-[rgba(15,15,15,0.8)] z-50 text-[rgba(255,255,255,0.8)] hidden" id="searchbar">
+                <div class="flex flex-col gap-4 justify-center whitespace-nowrap">
+                    <input id="searchinput" placeholder="search" class="mt-4 p-1 rounded-full border-2 border-black ring-1 bg-[rgba(0,0,0,0.1)]">
+                        <hr>
+                        <div class="flex flex-col gap-2 h-[40vh]" id="searchResult">
+                        </div>
+                </div>
+            </div>
+
+            <div class="absolute top-0 left-0 w-full bg-[rgba(15,15,15,0.8)] z-50 text-[rgba(255,255,255,0.8)] hidden" id="settingbar">
+                <div class="flex flex-col gap-4 justify-center whitespace-nowrap">
+                        <div class="flex flex-col gap-2 h-[60vh]">
+                            <div class="text-xl font-bold">Theme <i class="fa fa-caret-down"></i></div>
+                            <div class="ml-2 flex flex-col gap-2">
+                                <li class="btn btn-neutral" id="darkbtn">Dark Mode</li>
+                                <li class="btn" id="lightbtn">Light Mode</li>
+                            </div>
+                            <div class="text-xl font-bold">Language <i class="fa fa-caret-down"></i></div>
+                            <div class="ml-2 flex flex-col gap-2">
+                                <li class="btn btn-primary" id="langAbtn">Indonesia</li>
+                                <li class="btn btn-secondary" id="langBbtn">English</li>
+                                <li class="btn btn-accent" id="langCbtn">Japanese</li>
+                            </div>
+                            <div class="text-xl font-bold">Font <i class="fa fa-caret-down"></i></div>
+                            <div class="ml-2 flex flex-col gap-2">
+                                <li class="btn btn-success" id="fontAbtn">Times New Roman</li>
+                                <li class="btn btn-warning" id="fontBbtn">Verdana</li>
+                                <li class="btn btn-error" id="fontCbtn">Courier</li>
+                                <li class="btn btn-secondary" id="fontDbtn">Default</li>
+                                <li class="btn btn-accent" id="fontEbtn">Serif</li>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="md:w-[30%] sm:w-[40%] absolute top-0 left-0 w-[50%] bg-[rgba(15,15,15,0.8)] 
+                z-50 text-[rgba(255,255,255,0.8)] overflow-x-hidden hidden" id="subnavbar">
+                <div class="flex flex-col gap-2">
+                    <div class="text-xl font-bold">Tools <i class="fa fa-caret-down"></i></div>
+                        <div class="sm:ml-2 flex flex-col gap-2" id="toollists">
+                            
+                        </div>
+                    <div class="text-xl font-bold">Games <i class="fa fa-caret-down"></i></div>
+                        <div class="sm:ml-2 flex flex-col gap-2" id="gamelists">
+                            
+                        </div>
+                    <div class="text-xl font-bold">Playground <i class="fa fa-caret-down"></i></div>
+                        <div class="sm:ml-2 flex flex-col gap-2" id="playgroundlists">
+                            
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <main class="flex-1 flex items-center flex-col min-w-full bg-slate-950"
+            id="container">
+            <div class="sm:w-[75%] flex flex-col gap-4 w-[90%] bg-slate-950
+                " id="container-content">
+                
+                <section class="w-full min-h-[50vh] bg-[rgba(0,0,0,0.1)] mt-12">
+
+                    <section class="flex flex-col justify-center items-center gap-4 w-full min-h-[30vh] p-2 border-b-4
+                      border-gray-700 mb-12 text-slate-800 [text-shadow:1px_1px_2px_darkblue] font-bold [letter-spacing:4px] bg-cyan-50
+                        rounded-xl">
+                        <div class="flex flex-col  items-center text-1xl">
+                            <div>
+                                WEBSITE LOCATION
+                            </div>
+                            <div class="">
+                                CURRENTLY IN:
+                            </div>
+                            <div class="text-2xl">
+                                Landing Page
+                            </div>
+                        </div>
+
+                        <div class="lg:gap-8 md:gap-6 sm:gap-4 grid grid-cols-2 grid-rows-2 gap-2">
+
+                            <div class="col-span-1 row-span-1 flex flex-col items-center justify-center">
+                                <div class="text-sm font-bold">
+                                    <img alt="device" class="md:max-h-32 sm:max-h-28 border-4 border-black rounded-lg" src="./core/assets/UtilityGamePg - Google Chrome 26_05_2026 11_59_32.png"/>
+                                </div>
+                            </div>
+
+                            <div class="col-span-1 row-span-2 flex flex-col items-center justify-center">
+                                <div class="text-sm font-bold">
+                                    <img alt="device" class="md:max-h-64 sm:max-h-52 border-4 border-black rounded-lg" src="./core/assets/UtilityGamePg - Google Chrome 26_05_2026 12_00_28.png"/>
+                                </div>
+                            </div>
+
+                            <div class="col-span-1 row-span-1 flex flex-col items-center justify-center">
+                                <div class="text-sm font-bold">
+                                    <img alt="device" class="md:max-h-32 sm:max-h-28 border-4 border-black rounded-lg" src="./core/assets/UtilityGamePg - Google Chrome 26_05_2026 12_00_08.png"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sm:[letter-spacing:8px] text-xs opacity-60">
+                            Website Ready • To Dive 
+                            <p class="mt-1">Local Time: <span id="time"></span> WIB</p>
+                        </div>
+                    </section>
+                    <section class="flex flex-row gap-4 w-full min-h-[50vh] p-2 pb-12 border-b-4 border-gray-700 mb-12">
+                        <div class="flex flex-col gap-4">
+                            <h1 class="sm:text-3xl text-2xl font-bold">Hello, <span class="text-cyan-300">Welcome</span> to My <span class="text-purple-300">Digital Space</span></h1>
+                            <p class="sm:text-2xl text-1xl font-bold">This is where i <span class="text-yellow-300">built things</span>,
+                                make this site as <span class="text-yellow-300">my virtual home-like</span>,
+                                <span class="text-yellow-300">test ideas, and hangout digitally.</span>
+                                A lot of content will be inserted here, primarily used for tools, games, and playground hub.
+                            </p>
+                            <p class="sm:text-2xl text-1xl text-yellow-300">There will be more, stay tune!</p>
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <img alt="code" class="max-w-28 max-h-28 ring-4 ring-purple-900 ring-offset-1 border-black rounded-full" src="./core/assets/images.png"/>
+                            <img alt="code" class="max-w-28 max-h-28 ring-4 ring-purple-900 ring-offset-1 border-black rounded-full" src="./core/assets/6567206.png"/>
+                        </div>
+                    </section>
+                    <section class="grid grid-cols-2 gap-2 w-full min-h-[50vh] p-2 pb-12 border-b-4 border-gray-700 mb-12">
+                        <div class="flex flex-col justify-between">
+                            <h1 class="sm:text-3xl text-2xl font-bold">Then, <span class="text-cyan-300">YOU CAN</span> Scroll <span class="text-purple-300">More and More</span></h1>
+                            <img alt="code" class="max-w-28 max-h-36 ring-4 ring-purple-900 ring-offset-1 border-black rounded-full" src="./core/assets/images (1).png"/>
+                        
+                        </div>
+                        <div class="flex flex-col gap-4 justify-between">
+                            <p class="sm:text-3xl text-2xl font-bold">Scroll below <span class="text-yellow-300">so you fill find</span>,
+                                interesting content!
+                            </p>
+                            <p class="lg:text-3xl sm:text-2xl text-1xl font-bold">Or, you can get into navigation menu</p>
+                            <span class="lg:text-3xl sm:text-2xl text-1xl font-bold text-red-700">Hardly ever miss it</span>
+                        </div>
+                    </section>
+                    <section class="grid grid-cols-2 w-full min-h-[50vh] gap-4 p-2 pb-12 border-b-4 border-gray-700 mb-12">
+                        <div class="col-span-1">
+                            <img alt="code" class="min-w-36 min-h-36 max-w-40 max-h-40 ring-4 ring-purple-900 ring-offset-1 border-black rounded-full" src="./core/assets/extension_icon.png"/>
+                        </div>
+                        <div class="flex flex-col col-span-1">
+                            <h1 class="sm:text-3xl text-2xl font-bold"><span class="text-cyan-300">My nickname is</span> <span class="text-purple-300">Yukihara Aoba (JP Name) and XueFeng (CN Name)</span>
+                            </h1>
+                            <span class="sm:text-2xl text-1xl font-bold">- As Frontend Developer (Currently)</span>
+                        </div>
+                        <div class="flex flex-col gap-4 col-span-2">
+                            <p class="sm:text-3xl text-2xl font-bold">I'm Interested <span class="text-yellow-300"></span>in learning software engineering, 
+                                <span class="text-cyan-300">furthermore</span>
+                                in, i want to learn about <span class="text-yellow-300">DevOps also</span>, and
+                                interesting content!
+                            </p>
+                            <p class="text-2xl font-bold">Journey started because of interest in math & physics, became divided interest in coding</p>
+                        </div>
+                    </section> 
+                    <section class="flex flex-col gap-4 font-bold w-full min-h-[40vh] p-2 pb-12 border-b-4 mb-12">
+                        <h2 class="font-bold text-2xl">Learning Progression</h2>
+                        <ul class="md:text-2xl sm:[letter-spacing:2px] w-full text-1xl border-l-4 ">
+                            <li class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">HTML, CSS, JS, PHP, SQL</li>
+                            <li class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">Python, FastAPI, MongoDB</li>
+                            <li class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">CMD, Powershell, Git, Bash, TEM, Scripting</li>
+                            <li class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">NodeJS, ElectronJS, Ionic, PhaserJS</li>
+                            <li class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">TS, Tailwind, DaisyUI, ReactJS, NextJS, Zustand</li>
+                            <li class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">VueJS, Bootstrap, Laravel</li>
+                        </ul>
+                    </section>
+                    <section class="flex flex-col gap-2 font-bold w-full min-h-[40vh] p-2 pb-12 border-b-4 mb-12">
+                       <h2 class="font-bold text-2xl">Web Development</h2>
+                       <div class="w-full p-1">
+                            <div class=mb-4><span class="sm:text-2xl text-xl">Mode: 1</span> <span class="sm:text-xl text-lg">&nbsp;(TAILWIND + VUEJS + LARAVEL)</span></div>
+                            <div class="flex flex-row gap-4">
+                                <img alt="img" class="max-w-12 max-v-12 rounded-xl border-4 border-black" src="./core/assets/tailwind.webp"/>
+                                <img alt="img" class="max-w-12 max-v-12 rounded-xl border-4 border-black" src="./core/assets/vue.jpg"/>
+                                <img alt="img" class="max-w-12 max-v-12 rounded-xl border-4 border-black" src="./core/assets/laravel.png"/>
+                            </div>
+                       </div>
+                       <div class="w-full p-1">
+                            <div class=mb-4><span class="sm:text-2xl text-xl">Mode: 2</span> <span class="sm:text-xl text-lg">&nbsp;(TAILWIND + REACTJS + FASTAPI)</span></div>
+                            <div class="flex flex-row gap-4">
+                                <img alt="img" class="max-w-12 max-v-12 rounded-xl border-4 border-black" src="./core/assets/tailwind.webp"/>
+                                <img alt="img" class="max-w-12 max-v-12 rounded-xl border-4 border-black" src="./core/assets/react.webp"/>
+                                <img alt="img" class="max-w-12 max-v-12 rounded-xl border-4 border-black" src="./core/assets/fastapi.png"/>
+                            </div>
+                       </div>
+                       <div class="w-full p-1">
+                            <div class=mb-4><span class="sm:text-2xl text-xl">Mode: 3</span> <span class="sm:text-xl text-lg"> (TAILWIND + NEXTJS + FASTAPI)</span></div>
+                            <div class="flex flex-row gap-4">
+                                <img alt="img" class="max-w-12 max-v-12 rounded-xl border-4 border-black" src="./core/assets/tailwind.webp"/>
+                                <img alt="img" class="max-w-12 max-v-12 rounded-xl border-4 border-black" src="./core/assets/next.png"/>
+                                <img alt="img" class="max-w-12 max-v-12 rounded-xl border-4 border-black" src="./core/assets/fastapi.png"/>
+                            </div>     
+                       </div>
+                    </section>
+                    <section class="grid grid-cols-3 grid-rows-3 w-full min-h-[50vh] gap-4 p-2 pb-12 border-b-4 border-gray-700 mb-12">
+                        <img alt="png" class="border-b rounded-xl" src="./core/assets/images.png"/>
+                        <img alt="png" class="border-b rounded-xl" src="./core/assets/images.png"/>
+                        <img alt="png" class="border-b rounded-xl" src="./core/assets/images.png"/>
+                        <img alt="png" class="border-b rounded-xl" src="./core/assets/images.png"/>
+                        <img alt="png" class="border-b rounded-xl" src="./core/assets/images.png"/>
+                        <img alt="png" class="border-b rounded-xl" src="./core/assets/images.png"/>
+                        <img alt="png" class="border-b rounded-xl" src="./core/assets/images.png"/>
+                        <img alt="png" class="border-b rounded-xl" src="./core/assets/images.png"/>
+                    </section>
+                    <section class="flex flex-col gap-2 font-bold w-full min-h-[40vh] p-2 pb-12 border-b-4 mb-12">
+                        <div class="md:text-3xl text-2xl tracking-widest bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-lg hover:bg-[rgba(0,0,0,0.5)]">Quick Guide
+                                 <i class="fa fa-question border-2 rounded-full"></i></div>
+                        <div class="md:text-2xl border-l-8 text-1xl">
+                            <div class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">Click on big title
+                                <span class="[text-shadow:1px_1px_0px_azure]">UTG STUDIO</span>, it'll bring you back to the landing page,</div>
+                            <div class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">Click on magnifying glass icon <i class="fa fa-search"></i> to search something available branch,
+                            </div>
+                            <div class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">Click three bar icon <i class="fa fa-bars"></i> to trigger side nav and find detailed branch,
+                            </div>
+                            <div class="bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-l-sm rounded-2xl hover:bg-[rgba(0,0,0,0.5)]">
+                               Click gear icon <i class="fa fa-gear"></i> to change app font family, theme and language. Good to Go!
+                            </div>
+                        </div>
+                    </section>
+                    <section class="flex flex-col gap-2 font-bold w-full min-h-[40vh] p-2 pb-12 border-b-4 mb-12">
+                        <div class="md:text-3xl text-2xl tracking-widest bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-lg hover:bg-[rgba(0,0,0,0.5)]">Update Log (1.4)
+                                 <i class="fa fa-sticky-note "></i></div>
+                        <div class="md:text-2xl border-l-8 text-1xl bg-slate-800">
+                                <div class="bg-[rgba(0,0,0,0.5)] mb-1 p-4 pl-1 rounded-r-md hover:bg-[rgba(0,0,0,0.5)]">
+                                    <span class="md:text-3xl text-2xl">||</span>
+                                    {Update Theme and Font}</div>
+                                <div class="bg-[rgba(0,0,0,0.5)] mb-1 p-4 pl-1 rounded-r-md hover:bg-[rgba(0,0,0,0.5)]">
+                                    <span class="md:text-3xl text-2xl">||</span>
+                                    {Update Live Search}</div>
+                                <div class="bg-[rgba(0,0,0,0.5)] mb-1 p-4 pl-1 rounded-r-md hover:bg-[rgba(0,0,0,0.5)]">
+                                    <span class="md:text-3xl text-2xl">||</span>
+                                    {Update Navigation}</div>
+                                <div class="bg-[rgba(0,0,0,0.5)] mb-1 p-4 pl-1 rounded-r-md hover:bg-[rgba(0,0,0,0.5)]">
+                                    <span class="md:text-3xl text-2xl">||</span>
+                                    {Update Stay Tune Info}</div>
+                                <div class="bg-[rgba(0,0,0,0.5)] mb-1 p-4 pl-1 rounded-r-md hover:bg-[rgba(0,0,0,0.5)]">
+                                    <span class="md:text-3xl text-2xl">||</span>
+                                    {Insert System Info}</div>
+                                <div class="bg-[rgba(0,0,0,0.5)] mb-1 p-4 pl-1 rounded-r-md hover:bg-[rgba(0,0,0,0.5)]">
+                                    <span class="md:text-3xl text-2xl">||</span>
+                                    {Insert Update Log}</div>
+                        </div>
+                    </section>
+                     <section class="flex flex-col gap-2 font-bold w-full min-h-[40vh] p-2 pb-12 border-b-4 mb-12">
+                        <div class="md:text-3xl text-2xl tracking-widest bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-lg hover:bg-[rgba(0,0,0,0.5)]">
+                            System Info (1.2) <i class="fa fa-globe "></i></div>
+                        <div class="md:text-2xl text-1xl tracking-widest bg-[rgba(0,0,0,0.2)] mb-1 p-2 pl-1 rounded-lg hover:bg-[rgba(0,0,0,0.5)]">
+                            <ul>
+                                <li>├── UTG STUDIO/</li>
+                                <li class="md:ml:16 sm:ml-12 ml-8">├── Landing Page</li>
+                                <li class="md:ml:16 sm:ml-12 ml-8">├── Content Post</li>
+                                <li class="md:ml:16 sm:ml-12 ml-8">├── About</li>
+                                <li class="md:ml:16 sm:ml-12 ml-8">├── Tools/</li>
+                                <li class="md:ml:16 sm:ml-12 ml-8">&nbsp;   └── Main</li>
+                                <li class="md:ml:16 sm:ml-12 ml-8">├── Games/</li>
+                                 <li class="md:ml:16 sm:ml-12 ml-8">&nbsp;   └── Main</li>
+                                <li class="md:ml:16 sm:ml-12 ml-8">├── Playground/</li>
+                                 <li class="md:ml:16 sm:ml-12 ml-8">&nbsp;   └── Main</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section class="font-bold w-full min-h-[20vh] p-2 pb-12 border-b-4 mb-12">
+                        <div class="md:text-3xl flex flex-col gap-4  text-2xl tracking-widest 
+                         bg-[rgba(0,0,0,0.2)] pl-6 p-8 rounded-lg hover:bg-[rgba(0,0,0,0.5)]
+                         border-b-4">
+                            <span class="text-[rgba(255,255,255,0.3)]">Cross Platform</span>
+                            <div class="flex flex-col gap-2">
+                                <div>Also! Available as</div>
+                                <div> mobile app (made with <span class="text-cyan-300 [text-shadow:1px_1px_1px_yellow] drop-shadow-[0_0_4px_rgba(200,104,201,0.5)]">Ionic Framework</span>)</div>
+                                <div>desktop app (made with <span class="text-yellow-300 [text-shadow:1px_1px_1px_cyan] drop-shadow-[0_0_4px_rgba(253,224,71,0.5)]">ElectronJS Framework</span>)</div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="flex flex-col gap-6 items-center [letter-spacing:10px]
+                         font-bold w-full min-h-[30vh] p-12 border-b-4 mb-12 bg-[rgba(0,0,0,0.3)]
+                         rounded-xl drop-shadow-[0_4px_10px_rgba(255,0,205,0.7)]">
+                        <h1 class="[letter-spacing:4px] text-base">Incoming Update</h1>
+                        <h1 class="text-3xl">STAY</h1>
+                        <h1 class="text-3xl">TUNED!</h1>
+                    </section>
+
+                </section>
+                
+            </div>
+
+        </main>
+
+        <footer class="flex justify-center items-center flex-none bg-slate-900 w-full h-10 p-1 text-xs"
+            id="footer">
+            <cite>@Copyright According to International Law</cite>
+        </footer>
+    </div>
+
+    <script type="module" src="./core/core.js"></script>
+    <script type="module" src="./core/search.js"></script>
+    <script type="module" src="./core/subnav.js"></script>
+    <script type="module" src="./core/theme.js"></script>
+    <script type="module" src="./core/font.js"></script>
+</body>
+</html> 

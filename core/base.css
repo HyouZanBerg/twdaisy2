@@ -1,0 +1,88 @@
+.font-times{
+    font-family: "Times New Roman", serif;
+}
+
+.font-verdana{
+    font-family: Verdana, sans-serif;
+}
+
+.font-courier{
+    font-family: "Courier New", monospace;
+}
+
+.font-georgia{
+    font-family: Georgia, serif;
+}
+
+.font-tahoma{
+    font-family: Tahoma, sans-serif;
+}
+
+
+main::-webkit-scrollbar {
+    width: 10px !important;
+}
+
+main::-webkit-scrollbar-track {
+    background: #2d1b4e !important; 
+}
+
+main::-webkit-scrollbar-thumb {
+    background: #820df0 !important; 
+    border-radius: 10px !important;
+    border: 2px solid #2d1b4e !important; 
+}
+
+main::-webkit-scrollbar-thumb:hover {
+    background: #c084fc !important; 
+}
+
+main {
+    position:relative;
+    overflow-y: auto;
+    scrollbar-width: thin !important;
+    scrollbar-color: #9421ff #2d1b4e !important; 
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.03) 2px,
+        transparent 2px,
+        transparent 10px
+    );
+}
+
+
+nav {
+    overflow-y: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+    }
+
+nav::-webkit-scrollbar {
+    display: none;
+    }     
+
+
+#searchResult, #settingbar, #subnavbar {
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+    }
+
+#searchResult::-webkit-scrollbar {
+    display: none;
+    }     
+
+#settingbar::-webkit-scrollbar {
+    display: none;
+    }     
+    
+#subnavbar::-webkit-scrollbar {
+    display: none;
+    }     
+
+
+#subnavbar {
+    height: calc(100vh - 7.5rem) !important;
+}
